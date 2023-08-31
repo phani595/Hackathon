@@ -10,7 +10,7 @@ import pandas as pd
 
 # API_KEY = env("apikey")
 
-API_KEY= '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'
+API_KEY= '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'
 
 def create_agent(filename: str):
     """

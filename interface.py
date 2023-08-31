@@ -28,8 +28,8 @@ def write_response(response_dict: dict):
     Returns:
         None.
     """
-    st.write(response_dict)
-    st.write(np.random.randn(5, 2))
+    # st.write(response_dict)
+    # st.write(np.random.randn(5, 2))
     # Check if the response is an answer.
     if "answer" in response_dict:
         st.write(response_dict["answer"])
