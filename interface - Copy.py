@@ -3,6 +3,9 @@ import pandas as pd
 import json
 from agent import query_agent, create_agent
 
+import pandas as pd
+from pandasai import PandasAI
+
 import numpy as np
 
 
@@ -73,13 +76,29 @@ query = st.text_area("Insert your query")
 
 if st.button("Submit Query", type="primary"):
     # Create an agent from the CSV file.
-    agent = create_agent(data)
+    # agent = create_agent(data)
+    df = pd.read_csv(data) 
+    data_frames = []
+    data_frames.append(df)
+
+    combined_df = pd.concat(data_frames, ignore_index=True)
+
+    from pandasai.llm.openai import OpenAI
+    llm = OpenAI(api_token="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")
+
+    pandas_ai = PandasAI(llm, conversational=False, enable_cache=True)
+
+    response = pandas_ai.run(combined_df, prompt=query)
+
+   
+
+    st.write(response)
 
     # Query the agent.
-    response = query_agent(agent=agent, query=query)
+    # response = query_agent(agent=agent, query=query)
 
     # Decode the response.
-    decoded_response = decode_response(response)
+    # decoded_response = decode_response(response)
 
     # Write the response to the Streamlit app.
-    write_response(decoded_response)
+    # write_response(decoded_response)
