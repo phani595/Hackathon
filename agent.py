@@ -10,7 +10,9 @@ import pandas as pd
 
 # API_KEY = env("apikey")
 
-API_KEY= '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'
+API_KEY= '````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````'
+
+API_KEY_2 = API_KEY.replace('````', '')
 
 def create_agent(filename: str):
     """
@@ -24,7 +26,7 @@ def create_agent(filename: str):
     """
 
     # Create an OpenAI object.
-    llm = OpenAI(openai_api_key=API_KEY)
+    llm = OpenAI(openai_api_key=API_KEY_2)
 
     # Read the CSV file into a Pandas DataFrame.
     df = pd.read_csv(filename)
