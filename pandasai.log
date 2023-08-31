@@ -1,0 +1,503 @@
+2023-08-31 12:25:55 [INFO] Question: plot the power and altitude over time?
+2023-08-31 12:25:55 [INFO] Running PandasAI with openai LLM...
+2023-08-31 12:25:55 [INFO] Prompt ID: 96138aaa-62a1-4c13-babd-1f6a3cf278f8
+2023-08-31 12:25:56 [INFO] error_code=invalid_api_key error_message='Incorrect API key provided: sk-u1VyX***************************************HXZl. You can find your API key at https://platform.openai.com/account/api-keys.' error_param=None error_type=invalid_request_error message='OpenAI API error received' stream_error=False
+2023-08-31 12:26:22 [INFO] Question: total calories burned ?
+2023-08-31 12:26:22 [INFO] Running PandasAI with openai LLM...
+2023-08-31 12:26:22 [INFO] Prompt ID: 6833cd3b-819b-4837-94c0-ea9d94eacce2
+2023-08-31 12:26:22 [INFO] error_code=invalid_api_key error_message='Incorrect API key provided: sk-u1VyX***************************************HXZl. You can find your API key at https://platform.openai.com/account/api-keys.' error_param=None error_type=invalid_request_error message='OpenAI API error received' stream_error=False
+2023-08-31 12:27:48 [INFO] Question: total calories burned ?
+2023-08-31 12:27:48 [INFO] Running PandasAI with openai LLM...
+2023-08-31 12:27:48 [INFO] Prompt ID: d7ee0c13-0133-43f0-83a1-1975cb8c17d5
+2023-08-31 12:27:48 [INFO] error_code=invalid_api_key error_message='Incorrect API key provided: sk-u1VyX***************************************HXZl. You can find your API key at https://platform.openai.com/account/api-keys.' error_param=None error_type=invalid_request_error message='OpenAI API error received' stream_error=False
+2023-08-31 12:30:33 [INFO] Question: total calories burned ?
+2023-08-31 12:30:33 [INFO] Running PandasAI with openai LLM...
+2023-08-31 12:30:33 [INFO] Prompt ID: 3440c1e2-8a31-49ec-b08e-865d652e12f4
+2023-08-31 12:30:50 [INFO] 
+                    Code generated:
+                    ```
+                    # TODO import all the dependencies required
+import pandas as pd
+
+# Analyze the data
+# 1. Prepare: Preprocessing and cleaning data if necessary
+# 2. Process: Manipulating data for analysis (grouping, filtering, aggregating, etc.)
+# 3. Analyze: Conducting the actual analysis (if the user asks to create a chart save it to an image in exports/charts/temp_chart.png and do not show the chart.)
+# 4. Output: return a dictionary of:
+# - type (possible values "text", "number", "dataframe", "plot")
+# - value (can be a string, a dataframe or the path of the plot, NOT a dictionary)
+# Example output: { "type": "text", "value": "The average loan amount is $15,000." }
+def analyze_data(dfs: list[pd.DataFrame]) -> dict:
+    # Process
+    total_calories = dfs[0]['calories'].sum()
+    
+    # Output
+    return {"type": "number", "value": total_calories}
+
+# Declare a result variable
+result = analyze_data(dfs)
+                    ```
+                
+2023-08-31 12:30:50 [INFO] 
+Code running:
+```
+def analyze_data(dfs: list[pd.DataFrame]) ->dict:
+    total_calories = dfs[0]['calories'].sum()
+    return {'type': 'number', 'value': total_calories}
+
+
+result = analyze_data(dfs)
+        ```
+2023-08-31 12:30:50 [INFO] Answer: {'type': 'number', 'value': 76192503}
+2023-08-31 12:30:50 [INFO] Executed in: 16.629642248153687s
+2023-08-31 12:31:09 [INFO] Running PandasAI with openai LLM...
+2023-08-31 12:31:09 [INFO] Prompt ID: 4e10be67-7d10-4bf3-a48e-544ad0991613
+2023-08-31 12:31:36 [INFO] 
+                    Code generated:
+                    ```
+                    # TODO import all the dependencies required
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Analyze the data
+# 1. Prepare: Preprocessing and cleaning data if necessary
+# 2. Process: Manipulating data for analysis (grouping, filtering, aggregating, etc.)
+# 3. Analyze: Conducting the actual analysis (if the user asks to create a chart save it to an image in exports/charts/temp_chart.png and do not show the chart.)
+# 4. Output: return a dictionary of:
+# - type (possible values "text", "number", "dataframe", "plot")
+# - value (can be a string, a dataframe or the path of the plot, NOT a dictionary)
+# Example output: { "type": "text", "value": "The average loan amount is $15,000." }
+def analyze_data(dfs: list[pd.DataFrame]) -> dict:
+    # Code goes here (do not add comments)
+    df = dfs[0]
+    
+    # Prepare: Preprocessing and cleaning data if necessary
+    df = df.dropna(subset=['speed', 'Altitude'])
+    
+    # Process: Manipulating data for analysis (grouping, filtering, aggregating, etc.)
+    x = df['Altitude']
+    y = df['speed']
+    
+    # Analyze: Conducting the actual analysis (if the user asks to create a chart save it to an image in exports/charts/temp_chart.png and do not show the chart.)
+    plt.plot(x, y)
+    plt.xlabel('Altitude')
+    plt.ylabel('Speed')
+    plt.title('Speed as a function of Altitude')
+    plt.savefig('exports/charts/temp_chart.png')
+    plt.close()
+    
+    # Output: return a dictionary of type "plot" with the path of the plot
+    return {"type": "plot", "value": "exports/charts/temp_chart.png"}
+
+# Declare a result variable
+result = analyze_data(dfs)
+                    ```
+                
+2023-08-31 12:31:36 [INFO] 
+Code running:
+```
+def analyze_data(dfs: list[pd.DataFrame]) ->dict:
+    df = dfs[0]
+    df = df.dropna(subset=['speed', 'Altitude'])
+    x = df['Altitude']
+    y = df['speed']
+    plt.plot(x, y)
+    plt.xlabel('Altitude')
+    plt.ylabel('Speed')
+    plt.title('Speed as a function of Altitude')
+    plt.savefig('exports/charts/temp_chart.png')
+    plt.close()
+    return {'type': 'plot', 'value': 'exports/charts/temp_chart.png'}
+
+
+result = analyze_data(dfs)
+        ```
+2023-08-31 12:31:38 [INFO] Answer: {'type': 'plot', 'value': 'exports/charts/temp_chart.png'}
+2023-08-31 12:31:38 [INFO] Executed in: 28.894996166229248s
+2023-08-31 12:50:25 [INFO] Question: draw graph between time and calories burned
+
+
+2023-08-31 12:50:25 [INFO] Running PandasAI with openai LLM...
+2023-08-31 12:50:25 [INFO] Prompt ID: c5809059-6797-4496-ba30-7bebd393d3d9
+2023-08-31 12:50:58 [INFO] 
+                    Code generated:
+                    ```
+                    # TODO import all the dependencies required
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Analyze the data
+# 1. Prepare: Preprocessing and cleaning data if necessary
+# 2. Process: Manipulating data for analysis (grouping, filtering, aggregating, etc.)
+# 3. Analyze: Conducting the actual analysis (if the user asks to create a chart save it to an image in exports/charts/temp_chart.png and do not show the chart.)
+# 4. Output: return a dictionary of:
+# - type (possible values "text", "number", "dataframe", "plot")
+# - value (can be a string, a dataframe or the path of the plot, NOT a dictionary)
+# Example output: { "type": "text", "value": "The average loan amount is $15,000." }
+def analyze_data(dfs: list[pd.DataFrame]) -> dict:
+    # Code goes here (do not add comments)
+    df = dfs[0]  # Assuming we are working with the first dataframe in the list
+    
+    # 1. Prepare: Preprocessing and cleaning data if necessary
+    df['Time'] = pd.to_datetime(df['Time'])  # Convert 'Time' column to datetime format
+    
+    # 2. Process: Manipulating data for analysis (grouping, filtering, aggregating, etc.)
+    df_filtered = df[['Time', 'calories']].dropna()  # Filter out rows with missing values in 'Time' or 'calories' columns
+    
+    # 3. Analyze: Conducting the actual analysis
+    plt.plot(df_filtered['Time'], df_filtered['calories'])
+    plt.xlabel('Time')
+    plt.ylabel('Calories Burned')
+    plt.title('Calories Burned over Time')
+    plt.savefig('exports/charts/temp_chart.png')  # Save the plot as an image
+    plt.close()  # Close the plot to prevent it from being displayed
+    
+    # 4. Output: return a dictionary with the path of the plot
+    return {"type": "plot", "value": "exports/charts/temp_chart.png"}
+
+# Declare a result variable
+result = analyze_data(dfs)
+                    ```
+                
+2023-08-31 12:50:58 [INFO] 
+Code running:
+```
+def analyze_data(dfs: list[pd.DataFrame]) ->dict:
+    df = dfs[0]
+    df['Time'] = pd.to_datetime(df['Time'])
+    df_filtered = df[['Time', 'calories']].dropna()
+    plt.plot(df_filtered['Time'], df_filtered['calories'])
+    plt.xlabel('Time')
+    plt.ylabel('Calories Burned')
+    plt.title('Calories Burned over Time')
+    plt.savefig('exports/charts/temp_chart.png')
+    plt.close()
+    return {'type': 'plot', 'value': 'exports/charts/temp_chart.png'}
+
+
+result = analyze_data(dfs)
+        ```
+2023-08-31 12:50:59 [INFO] Answer: {'type': 'plot', 'value': 'exports/charts/temp_chart.png'}
+2023-08-31 12:50:59 [INFO] Executed in: 33.944921255111694s
+2023-08-31 12:54:23 [INFO] Question: Why is torque balance important in cycling?
+2023-08-31 12:54:23 [INFO] Running PandasAI with openai LLM...
+2023-08-31 12:54:23 [INFO] Prompt ID: bdbd37f4-5249-48ff-99e2-eb24e1cd4f9b
+2023-08-31 12:54:45 [INFO] 
+                    Code generated:
+                    ```
+                    # TODO import all the dependencies required
+import pandas as pd
+
+# Analyze the data
+# 1. Prepare: Preprocessing and cleaning data if necessary
+# 2. Process: Manipulating data for analysis (grouping, filtering, aggregating, etc.)
+# 3. Analyze: Conducting the actual analysis (if the user asks to create a chart save it to an image in exports/charts/temp_chart.png and do not show the chart.)
+# 4. Output: return a dictionary of:
+# - type (possible values "text", "number", "dataframe", "plot")
+# - value (can be a string, a dataframe or the path of the plot, NOT a dictionary)
+# Example output: { "type": "text", "value": "The average loan amount is $15,000." }
+def analyze_data(dfs: list[pd.DataFrame]) -> dict:
+    # Code goes here (do not add comments)
+    # Extract the relevant columns from the dataframe
+    df = dfs[0][['left_torque_effectiveness', 'right_torque_effectiveness']]
+    
+    # Calculate the average torque balance
+    avg_torque_balance = df.mean()
+    
+    # Prepare the output
+    output = {
+        "type": "text",
+        "value": f"The average torque balance is {avg_torque_balance['left_torque_effectiveness']}% on the left side and {avg_torque_balance['right_torque_effectiveness']}% on the right side."
+    }
+    
+    return output
+
+# Declare a result variable
+result = analyze_data(dfs)
+                    ```
+                
+2023-08-31 12:54:45 [INFO] 
+Code running:
+```
+def analyze_data(dfs: list[pd.DataFrame]) ->dict:
+    df = dfs[0][['left_torque_effectiveness', 'right_torque_effectiveness']]
+    avg_torque_balance = df.mean()
+    output = {'type': 'text', 'value': f"The average torque balance is {avg_torque_balance['left_torque_effectiveness']}% on the left side and {avg_torque_balance['right_torque_effectiveness']}% on the right side."}
+    return output
+
+
+result = analyze_data(dfs)
+        ```
+2023-08-31 12:54:45 [INFO] Answer: {'type': 'text', 'value': 'The average torque balance is 82.3575496717534% on the left side and 79.62571192556845% on the right side.'}
+2023-08-31 12:54:45 [INFO] Executed in: 22.86687731742859s
+2023-08-31 12:55:57 [INFO] Question: Why is torque balance important in cycling?
+2023-08-31 12:55:57 [INFO] Running PandasAI with openai LLM...
+2023-08-31 12:55:57 [INFO] Prompt ID: 86fff2b9-3fe5-4291-995c-a7204c40635b
+2023-08-31 12:55:57 [INFO] Using cached response
+2023-08-31 12:55:57 [INFO] 
+                    Code generated:
+                    ```
+                    # TODO import all the dependencies required
+import pandas as pd
+
+# Analyze the data
+# 1. Prepare: Preprocessing and cleaning data if necessary
+# 2. Process: Manipulating data for analysis (grouping, filtering, aggregating, etc.)
+# 3. Analyze: Conducting the actual analysis (if the user asks to create a chart save it to an image in exports/charts/temp_chart.png and do not show the chart.)
+# 4. Output: return a dictionary of:
+# - type (possible values "text", "number", "dataframe", "plot")
+# - value (can be a string, a dataframe or the path of the plot, NOT a dictionary)
+# Example output: { "type": "text", "value": "The average loan amount is $15,000." }
+def analyze_data(dfs: list[pd.DataFrame]) -> dict:
+    # Code goes here (do not add comments)
+    # Extract the relevant columns from the dataframe
+    df = dfs[0][['left_torque_effectiveness', 'right_torque_effectiveness']]
+    
+    # Calculate the average torque balance
+    avg_torque_balance = df.mean()
+    
+    # Prepare the output
+    output = {
+        "type": "text",
+        "value": f"The average torque balance is {avg_torque_balance['left_torque_effectiveness']}% on the left side and {avg_torque_balance['right_torque_effectiveness']}% on the right side."
+    }
+    
+    return output
+
+# Declare a result variable
+result = analyze_data(dfs)
+                    ```
+                
+2023-08-31 12:55:57 [INFO] 
+Code running:
+```
+def analyze_data(dfs: list[pd.DataFrame]) ->dict:
+    df = dfs[0][['left_torque_effectiveness', 'right_torque_effectiveness']]
+    avg_torque_balance = df.mean()
+    output = {'type': 'text', 'value': f"The average torque balance is {avg_torque_balance['left_torque_effectiveness']}% on the left side and {avg_torque_balance['right_torque_effectiveness']}% on the right side."}
+    return output
+
+
+result = analyze_data(dfs)
+        ```
+2023-08-31 12:55:57 [INFO] Answer: {'type': 'text', 'value': 'The average torque balance is 82.3575496717534% on the left side and 79.62571192556845% on the right side.'}
+2023-08-31 12:55:57 [INFO] Executed in: 0.015259265899658203s
+2023-08-31 12:56:02 [INFO] Question: Why is torque balance important in cycling?
+2023-08-31 12:56:02 [INFO] Running PandasAI with openai LLM...
+2023-08-31 12:56:02 [INFO] Prompt ID: 18b3d9b4-f69f-412a-8639-999c29675b26
+2023-08-31 12:56:02 [INFO] Using cached response
+2023-08-31 12:56:02 [INFO] 
+                    Code generated:
+                    ```
+                    # TODO import all the dependencies required
+import pandas as pd
+
+# Analyze the data
+# 1. Prepare: Preprocessing and cleaning data if necessary
+# 2. Process: Manipulating data for analysis (grouping, filtering, aggregating, etc.)
+# 3. Analyze: Conducting the actual analysis (if the user asks to create a chart save it to an image in exports/charts/temp_chart.png and do not show the chart.)
+# 4. Output: return a dictionary of:
+# - type (possible values "text", "number", "dataframe", "plot")
+# - value (can be a string, a dataframe or the path of the plot, NOT a dictionary)
+# Example output: { "type": "text", "value": "The average loan amount is $15,000." }
+def analyze_data(dfs: list[pd.DataFrame]) -> dict:
+    # Code goes here (do not add comments)
+    # Extract the relevant columns from the dataframe
+    df = dfs[0][['left_torque_effectiveness', 'right_torque_effectiveness']]
+    
+    # Calculate the average torque balance
+    avg_torque_balance = df.mean()
+    
+    # Prepare the output
+    output = {
+        "type": "text",
+        "value": f"The average torque balance is {avg_torque_balance['left_torque_effectiveness']}% on the left side and {avg_torque_balance['right_torque_effectiveness']}% on the right side."
+    }
+    
+    return output
+
+# Declare a result variable
+result = analyze_data(dfs)
+                    ```
+                
+2023-08-31 12:56:02 [INFO] 
+Code running:
+```
+def analyze_data(dfs: list[pd.DataFrame]) ->dict:
+    df = dfs[0][['left_torque_effectiveness', 'right_torque_effectiveness']]
+    avg_torque_balance = df.mean()
+    output = {'type': 'text', 'value': f"The average torque balance is {avg_torque_balance['left_torque_effectiveness']}% on the left side and {avg_torque_balance['right_torque_effectiveness']}% on the right side."}
+    return output
+
+
+result = analyze_data(dfs)
+        ```
+2023-08-31 12:56:02 [INFO] Answer: {'type': 'text', 'value': 'The average torque balance is 82.3575496717534% on the left side and 79.62571192556845% on the right side.'}
+2023-08-31 12:56:02 [INFO] Executed in: 0.00500178337097168s
+2023-08-31 12:56:33 [INFO] Question: plot power and altitude over time
+2023-08-31 12:56:33 [INFO] Running PandasAI with openai LLM...
+2023-08-31 12:56:33 [INFO] Prompt ID: 54ff1ab7-e002-44f5-9ccf-193479140001
+2023-08-31 12:57:07 [INFO] 
+                    Code generated:
+                    ```
+                    # TODO import all the dependencies required
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Analyze the data
+# 1. Prepare: Preprocessing and cleaning data if necessary
+# 2. Process: Manipulating data for analysis (grouping, filtering, aggregating, etc.)
+# 3. Analyze: Conducting the actual analysis (if the user asks to create a chart save it to an image in exports/charts/temp_chart.png and do not show the chart.)
+# 4. Output: return a dictionary of:
+# - type (possible values "text", "number", "dataframe", "plot")
+# - value (can be a string, a dataframe or the path of the plot, NOT a dictionary)
+# Example output: { "type": "text", "value": "The average loan amount is $15,000." }
+def analyze_data(dfs: list[pd.DataFrame]) -> dict:
+    # Code goes here (do not add comments)
+    df = dfs[0]
+    
+    # Prepare: Preprocessing and cleaning data if necessary
+    df['Datetime'] = pd.to_datetime(df['Date'] + ' ' + df['Time'])
+    
+    # Process: Manipulating data for analysis (grouping, filtering, aggregating, etc.)
+    df_filtered = df[['Datetime', 'power', 'enhanced_altitude']].dropna()
+    
+    # Analyze: Conducting the actual analysis
+    plt.figure(figsize=(12, 6))
+    plt.plot(df_filtered['Datetime'], df_filtered['power'], label='Power')
+    plt.plot(df_filtered['Datetime'], df_filtered['enhanced_altitude'], label='Altitude')
+    plt.xlabel('Time')
+    plt.ylabel('Value')
+    plt.title('Power and Altitude over Time')
+    plt.legend()
+    plt.savefig('exports/charts/temp_chart.png')
+    plt.close()
+    
+    # Output: return a dictionary of type "plot" with the path of the plot
+    return {"type": "plot", "value": "exports/charts/temp_chart.png"}
+
+# Declare a result variable
+result = analyze_data(dfs)
+                    ```
+                
+2023-08-31 12:57:07 [INFO] 
+Code running:
+```
+def analyze_data(dfs: list[pd.DataFrame]) ->dict:
+    df = dfs[0]
+    df['Datetime'] = pd.to_datetime(df['Date'] + ' ' + df['Time'])
+    df_filtered = df[['Datetime', 'power', 'enhanced_altitude']].dropna()
+    plt.figure(figsize=(12, 6))
+    plt.plot(df_filtered['Datetime'], df_filtered['power'], label='Power')
+    plt.plot(df_filtered['Datetime'], df_filtered['enhanced_altitude'], label='Altitude')
+    plt.xlabel('Time')
+    plt.ylabel('Value')
+    plt.title('Power and Altitude over Time')
+    plt.legend()
+    plt.savefig('exports/charts/temp_chart.png')
+    plt.close()
+    return {'type': 'plot', 'value': 'exports/charts/temp_chart.png'}
+
+
+result = analyze_data(dfs)
+        ```
+2023-08-31 12:57:08 [INFO] Answer: {'type': 'plot', 'value': 'exports/charts/temp_chart.png'}
+2023-08-31 12:57:08 [INFO] Executed in: 35.059309244155884s
+2023-08-31 13:02:57 [INFO] Question: How long after the race started did the rider reach peak power?
+2023-08-31 13:02:57 [INFO] Running PandasAI with openai LLM...
+2023-08-31 13:02:57 [INFO] Prompt ID: 9013de0e-33aa-4e2f-9c7e-34afb1f6f6b9
+2023-08-31 13:03:23 [INFO] 
+                    Code generated:
+                    ```
+                    # TODO import all the dependencies required
+import pandas as pd
+
+# Analyze the data
+# 1. Prepare: Preprocessing and cleaning data if necessary
+# 2. Process: Manipulating data for analysis (grouping, filtering, aggregating, etc.)
+# 3. Analyze: Conducting the actual analysis (if the user asks to create a chart save it to an image in exports/charts/temp_chart.png and do not show the chart.)
+# 4. Output: return a dictionary of:
+# - type (possible values "text", "number", "dataframe", "plot")
+# - value (can be a string, a dataframe or the path of the plot, NOT a dictionary)
+# Example output: { "type": "text", "value": "The average loan amount is $15,000." }
+def analyze_data(dfs: list[pd.DataFrame]) -> dict:
+    # Process: Manipulating data for analysis (grouping, filtering, aggregating, etc.)
+    df = dfs[0]
+    
+    # Convert Date and Time columns to datetime
+    df['Datetime'] = pd.to_datetime(df['Date'] + ' ' + df['Time'])
+    
+    # Filter rows with non-null power values
+    df_filtered = df[df['power'].notnull()]
+    
+    # Find the index of the row with the peak power
+    peak_power_index = df_filtered['power'].idxmax()
+    
+    # Calculate the time difference between the start of the race and the peak power
+    start_time = df_filtered['Datetime'].iloc[0]
+    peak_power_time = df_filtered['Datetime'].loc[peak_power_index]
+    time_difference = peak_power_time - start_time
+    
+    # Output: return a dictionary of type "text" with the time difference as the value
+    return {"type": "text", "value": f"The rider reached peak power {time_difference} after the race started."}
+
+# Declare a result variable
+result = analyze_data(dfs)
+                    ```
+                
+2023-08-31 13:03:23 [INFO] 
+Code running:
+```
+def analyze_data(dfs: list[pd.DataFrame]) ->dict:
+    df = dfs[0]
+    df['Datetime'] = pd.to_datetime(df['Date'] + ' ' + df['Time'])
+    df_filtered = df[df['power'].notnull()]
+    peak_power_index = df_filtered['power'].idxmax()
+    start_time = df_filtered['Datetime'].iloc[0]
+    peak_power_time = df_filtered['Datetime'].loc[peak_power_index]
+    time_difference = peak_power_time - start_time
+    return {'type': 'text', 'value': f'The rider reached peak power {time_difference} after the race started.'}
+
+
+result = analyze_data(dfs)
+        ```
+2023-08-31 13:03:24 [INFO] Answer: {'type': 'text', 'value': 'The rider reached peak power 0 days 05:19:32 after the race started.'}
+2023-08-31 13:03:24 [INFO] Executed in: 26.40794610977173s
+2023-08-31 13:03:49 [INFO] Question: Capital of Australia ?
+2023-08-31 13:03:49 [INFO] Running PandasAI with openai LLM...
+2023-08-31 13:03:49 [INFO] Prompt ID: 84a1f76f-0474-447f-8a67-bbd0fadb6d18
+2023-08-31 13:04:05 [INFO] 
+                    Code generated:
+                    ```
+                    # TODO import all the dependencies required
+import pandas as pd
+
+# Analyze the data
+# 1. Prepare: Preprocessing and cleaning data if necessary
+# 2. Process: Manipulating data for analysis (grouping, filtering, aggregating, etc.)
+# 3. Analyze: Conducting the actual analysis (if the user asks to create a chart save it to an image in exports/charts/temp_chart.png and do not show the chart.)
+# 4. Output: return a dictionary of:
+# - type (possible values "text", "number", "dataframe", "plot")
+# - value (can be a string, a dataframe or the path of the plot, NOT a dictionary)
+# Example output: { "type": "text", "value": "The average loan amount is $15,000." }
+def analyze_data(dfs: list[pd.DataFrame]) -> dict:
+    # Code goes here (do not add comments)
+    capital_of_australia = "Canberra"
+    return {"type": "text", "value": capital_of_australia}
+
+# Declare a result variable
+result = analyze_data(dfs)
+                    ```
+                
+2023-08-31 13:04:05 [INFO] 
+Code running:
+```
+def analyze_data(dfs: list[pd.DataFrame]) ->dict:
+    capital_of_australia = 'Canberra'
+    return {'type': 'text', 'value': capital_of_australia}
+
+
+result = analyze_data(dfs)
+        ```
+2023-08-31 13:04:05 [INFO] Answer: {'type': 'text', 'value': 'Canberra'}
+2023-08-31 13:04:05 [INFO] Executed in: 16.182022094726562s

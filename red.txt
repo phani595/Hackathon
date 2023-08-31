@@ -1,0 +1,5 @@
+https://dev.to/ngonidzashe/chat-with-your-csv-visualize-your-data-with-langchain-and-streamlit-ej7
+
+https://discuss.streamlit.io/t/simplest-way-to-deploy-a-streamlit-app-in-windows-server-2012/1835/7
+
+run streamlit run interface.py
