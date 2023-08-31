@@ -10,7 +10,7 @@ import pandas as pd
 
 # API_KEY = env("apikey")
 
-API_KEY= '````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````'
+API_KEY= '````sk-MLpxFD````RCABUuBTClUW````GrT3BlbkFJcjyt````7Fm75b9z6gHJ6q21````'
 
 API_KEY_2 = API_KEY.replace('````', '')
 
